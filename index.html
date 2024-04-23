@@ -4,9 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+
+        * body{
+            background-color: crimson;
+        }
+
+
+        .cronometro {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 48px;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+            width: 500px;
+        }
+
+        .cronometro span {
+            display: inline-block;
+            width: 70px; /* Ajuste o tamanho conforme necessário */
+            text-align: center;
+        }
+
+        .cronometro span:not(:last-child) {
+            margin-right: 10px;
+        }
+    </style>
     <title>Nosso Cronômetro</title>
 </head>
-<body class="bg-dark container d-flex justify-content-center align-items-center flex-column text-light mt-5">
+<body class="container d-flex justify-content-center align-items-center flex-column text-light mt-5">
     <br>
     <br>
     <br>
@@ -14,25 +46,29 @@
 
     <div class="text-center mt-5">
         <h2>
-            Faltam apenas
+          Esse é o tempo
         </h2>
-        <h1 class="cronometro fs-3 fw-bold">
-        </h1>
+        <div class="cronometro">
+            <span class="dias"></span> :
+            <span class="horas"></span> :
+            <span class="minutos"></span> :
+            <span class="segundos"></span>
+        </div>
         <h2>
-            para a gente se ver 💗
+          que está entre nós no momento 💗
         </h2>
 
-        <p>Estou esperando você aqui !</p>
-
-
-
+        <p>Estou esperando você aqui 😋 </p>
     </div>
 
     <script>
         function PegarHora(){
-            var c = document.getElementsByClassName("cronometro");
-            var hoje = new Date().getTime(); // Obtendo o tempo atual em milissegundos
+            var diasElement = document.querySelector(".dias");
+            var horasElement = document.querySelector(".horas");
+            var minutosElement = document.querySelector(".minutos");
+            var segundosElement = document.querySelector(".segundos");
 
+            var hoje = new Date().getTime(); // Obtendo o tempo atual em milissegundos
             var fim = new Date('05/03/2024 21:45:00').getTime(); // Data de fim em milissegundos
             var difMilisec = fim - hoje; // Diferença em milissegundos
 
@@ -42,7 +78,10 @@
             var minutos = Math.floor((difMilisec % (1000 * 60 * 60)) / (1000 * 60));
             var segundos = Math.floor((difMilisec % (1000 * 60)) / 1000);
 
-            c[0].innerHTML = `${dias} dias, ${horas} horas, ${minutos} minutos e ${segundos} segundos`;
+            diasElement.textContent = dias;
+            horasElement.textContent = horas;
+            minutosElement.textContent = minutos;
+            segundosElement.textContent = segundos;
         }
 
         setInterval(PegarHora, 1000);
